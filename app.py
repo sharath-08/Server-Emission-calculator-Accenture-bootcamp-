@@ -87,8 +87,6 @@ def main():
     # prints the output from calculate on to the rermical
     print(calculate(10000, 5))
 
-    pass
-
 
 if __name__ == "__main__":
     main()
