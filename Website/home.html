@@ -7,19 +7,16 @@
   </head>
   <body>
     <div id="myContent">
-      <h1><b>Green House Gas Emission Generator</b></h1>
+      <h1><b>Green House Gas Emission Estimator</b></h1>
       <form method="GET" action="analysis.html">
           <div>
               <br>
-              <label>What is your RPS Requirement?</label>
-              <input type="number" name="age" min="1" max="1000000" />
+              <label>What is your RTS Requirement?</label>
+              <input type="number" name="age" min="0" max="100000000" required/>
               <br>
               <br>
-              <label>What is your enterprise?</label>
-              <select name="enterprise" id="enterprise">
-                  <option value="cloud">Cloud</option>
-                  <option value="local">Local</option>
-              </select>
+              <label>Duration per RTS (in seconds)?</label>
+              <input type="number" name="seconds" min="0" max="10000" required/>
               <br>
               <br>
               <label>What is your region?</label>
