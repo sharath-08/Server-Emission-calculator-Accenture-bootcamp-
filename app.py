@@ -33,13 +33,16 @@ def calculate(req, task_duration):
 
     processor = math.ceil(cores / 20)
 
-    print(processor)
-
     # need to get # of servers as wekk. Formular  is servers - processoors / proc per server
     # we use 2 per server
     servers = math.ceil(processor / 2)
 
-    print(servers)
+    # get number of racks
+    # assume 17 servers per rack
+    racks = servers/15
+
+    # floor space = number of racks * vol of one 42U rack
+    floor_space = racks * (2.10 * 0.7 * 0.9)
 
     # Multiply number of servers * avg power consumption per server
     # 𝐴𝑣𝑒𝑟𝑎𝑔𝑒 𝑃𝑜𝑤𝑒𝑟 𝐷𝑟𝑎𝑤 𝑝𝑒𝑟 𝑠𝑒𝑟𝑣𝑒𝑟(𝑊) = (𝑃𝑚𝑎𝑥 − 𝑃𝑖𝑑𝑙𝑒) × ( 𝑛 ) + 𝑃𝑖𝑑𝑙𝑒 where n is server utilization
@@ -48,16 +51,34 @@ def calculate(req, task_duration):
     # multiply it by number of servers to get power rewuirements
     premise_power = servers * 4.944 * 1.69
 
+    # get power cost of servers
+    # using nsw average power cost at 28.54 c/kwh
+    # cost is in cents
+    cost = premise_power * 28.54
+
     # getttting emissions output
     emission = premise_power * 656.4
 
-    return emission
+    # AWS energy savings = premise_power/2.5
+    AWS_power = premise_power/2.5
+
+    # emissions from aws
+    AWS_emission = AWS_power * 656.4
+
+    return (emission, cost, racks, floor_space, AWS_power, AWS_emission, emission - AWS_emission)
 
 
 # main function will call the calculate function while we do the testing
 def main():
     # prints the output from calculate on to the rermical
-    print(calculate(100, 5), "per gram")
+    (emission, cost, rack, floor, aws, aws_e, saved) = calculate(10000, 5)
+    print(emission, "in gram")
+    print(cost, "cents")
+    print(rack, "number of racks")
+    print(floor, "floor space in meters")
+    print(aws, "AWS power consumption")
+    print(aws_e, "CO2 in g on AWS")
+    print(saved, "Amount of CO2 saved")
     pass
 
 
