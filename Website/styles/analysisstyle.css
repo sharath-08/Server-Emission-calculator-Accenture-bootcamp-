@@ -66,6 +66,24 @@ input {
     box-sizing: border-box;
 }
 
+a {
+    border-width: 1px;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border-style: none;
+    background-color: #ff8f00;
+    color: white;
+    font-weight: bold;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 25px;
+    padding-right: 25px;
+    width: auto;
+    text-decoration: none;
+}
+
     input[type=text] {
         width: 100%;
     }

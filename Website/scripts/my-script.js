@@ -1,7 +1,4 @@
 function init() {
-    const biscuit = document.getElementById('changeme');
-    biscuit.innerText = getUrlParam("age");
-
     document.getElementById("move").addEventListener("click", next);
 }
 
