@@ -10,6 +10,7 @@ In order to run the code, type "python app.py" into the terminal
 
 """
 import math
+import json
 
 # req is requests per second, task duration is per request in miliseconds
 
@@ -38,11 +39,13 @@ def calculate(req, task_duration):
     servers = math.ceil(processor / 2)
 
     # get number of racks
-    # assume 17 servers per rack
+    # assume 15 servers per rack
     racks = servers/15
 
-    # floor space = number of racks * vol of one 42U rack
-    floor_space = racks * (2.10 * 0.7 * 0.9)
+    # rack volume (m^3) = number of racks * vol of one 42U rack
+    rack_volume = racks * (2.10 * 0.7 * 0.9)
+    # floor_area (m^2) = no. of racks * (2D area of one rack) * space multiplier
+    floor_area = racks * (0.7*0.9) * 1.75
 
     # Multiply number of servers * avg power consumption per server
     # 𝐴𝑣𝑒𝑟𝑎𝑔𝑒 𝑃𝑜𝑤𝑒𝑟 𝐷𝑟𝑎𝑤 𝑝𝑒𝑟 𝑠𝑒𝑟𝑣𝑒𝑟(𝑊) = (𝑃𝑚𝑎𝑥 − 𝑃𝑖𝑑𝑙𝑒) × ( 𝑛 ) + 𝑃𝑖𝑑𝑙𝑒 where n is server utilization
@@ -65,20 +68,25 @@ def calculate(req, task_duration):
     # emissions from aws
     AWS_emission = AWS_power * 656.4
 
-    return (emission, cost, racks, floor_space, AWS_power, AWS_emission, emission - AWS_emission)
+    ret = {
+        "power": premise_power,
+        "emissions": emission,
+        "cost": cost,
+        "aws_power": AWS_power,
+        "aws_emission": AWS_emission,
+        "aws_cost": AWS_power * 28.54,
+        "difference": emission - AWS_emission
+    }
 
+    return json.dumps(ret)
 
 # main function will call the calculate function while we do the testing
+
+
 def main():
     # prints the output from calculate on to the rermical
-    (emission, cost, rack, floor, aws, aws_e, saved) = calculate(10000, 5)
-    print(emission, "in gram")
-    print(cost, "cents")
-    print(rack, "number of racks")
-    print(floor, "floor space in meters")
-    print(aws, "AWS power consumption")
-    print(aws_e, "CO2 in g on AWS")
-    print(saved, "Amount of CO2 saved")
+    print(calculate(10000, 5))
+
     pass
 
 
