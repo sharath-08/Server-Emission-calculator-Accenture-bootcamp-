@@ -11,7 +11,7 @@ In order to run the code, type "python app.py" into the terminal
 """
 import math
 
-# req is requests per second, task duration is per request in miliseconds
+# req is requests per second, task duration is per request in miliseconds ## second comment
 
 
 def calculate(req, task_duration):
