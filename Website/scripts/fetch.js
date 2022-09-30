@@ -31,10 +31,10 @@ async function post() {
         let power = document.createElement('p');
         let percent = document.createElement('b');
 
-        aws_cost.innerHTML = `${"Cloud Cost of Energy Consumprtion: " + author.aws_cost + " cents"}`;
+        aws_cost.innerHTML = `${"Cloud Cost of Energy Consumprtion: " + (author.aws_cost)/100 + " dollars"}`;
         aws_emission.innerHTML = `${"Cloud Co2 Emissions: " + author.aws_emission + " grams"}`;
         aws_power.innerHTML = `${"Cloud Power Consumption: " + author.aws_power + " killowats"}`;
-        cost.innerHTML = `${"Local Cost of Energy Consumption: " + author.cost + " cents"}`;
+        cost.innerHTML = `${"Local Cost of Energy Consumption: " + (author.cost)/100 + " dollars"}`;
         difference.innerHTML = `${"Emissions Difference (Local - Cloud): " + author.difference + " grams"}`;
         emissions.innerHTML = `${"Local Co2 Emissions: " + author.emissions + " grams"}`;
         power.innerHTML = `${"Local Power Consumption: " + author.power + " killowatts"}`;
