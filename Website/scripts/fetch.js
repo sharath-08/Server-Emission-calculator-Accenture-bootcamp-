@@ -31,13 +31,13 @@ async function post() {
         let power = document.createElement('p');
         let percent = document.createElement('b');
 
-        aws_cost.innerHTML = `${"Cloud Cost of Energy Consumprtion: " + (author.aws_cost)/100 + " dollars"}`;
-        aws_emission.innerHTML = `${"Cloud Co2 Emissions: " + author.aws_emission + " grams"}`;
-        aws_power.innerHTML = `${"Cloud Power Consumption: " + author.aws_power + " killowats"}`;
-        cost.innerHTML = `${"Local Cost of Energy Consumption: " + (author.cost)/100 + " dollars"}`;
-        difference.innerHTML = `${"Emissions Difference (Local - Cloud): " + author.difference + " grams"}`;
-        emissions.innerHTML = `${"Local Co2 Emissions: " + author.emissions + " grams"}`;
-        power.innerHTML = `${"Local Power Consumption: " + author.power + " killowatts"}`;
+        aws_cost.innerHTML = `${"Cloud Cost of Energy Consumprtion: " + ((author.aws_cost)/100).toLocaleString('en-US') + " dollars"}`;
+        aws_emission.innerHTML = `${"Cloud Co2 Emissions: " + author.aws_emission.toLocaleString('en-US') + " grams"}`;
+        aws_power.innerHTML = `${"Cloud Power Consumption: " + author.aws_power.toLocaleString('en-US') + " killowats"}`;
+        cost.innerHTML = `${"Local Cost of Energy Consumption: " + ((author.cost)/100).toLocaleString('en-US') + " dollars"}`;
+        difference.innerHTML = `${"Emissions Difference (Local - Cloud): " + author.difference.toLocaleString('en-US') + " grams"}`;
+        emissions.innerHTML = `${"Local Co2 Emissions: " + author.emissions.toLocaleString('en-US') + " grams"}`;
+        power.innerHTML = `${"Local Power Consumption: " + author.power.toLocaleString('en-US') + " killowatts"}`;
         percent.innerHTML = `${"There is an approximate " + (author.aws_emission/author.emissions)*100 + "% reduction in Co2 emissions when swtiching to a cloud provider!"}`;
 
         li.appendChild(power);
