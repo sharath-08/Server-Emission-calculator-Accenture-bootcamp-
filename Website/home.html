@@ -11,19 +11,19 @@
       <form method="GET" action="analysis.html">
           <div>
               <br>
-              <label>What is your RTS Requirement?</label>
+              <label>What is expected requests per second?</label>
               <input type="number" name="age" min="0" max="100000000" required/>
               <br>
               <br>
-              <label>Duration per RTS (in seconds)?</label>
-              <input type="number" name="seconds" min="0" max="10000" required/>
+              <label>What is the average duration of each request (in millisecond)?</label>
+              <input type="number" name="seconds" min="0" max="100000" required/>
               <br>
               <br>
               <label>What is your region?</label>
               <select name="region" id="region">
                   <option value="Australia">Australia</option>
                   <option value="US">US</option>
-                  <option value="US">UK</option>
+                  <option value="UK">UK</option>
               </select>
           </div>
         <input type="submit" value="BEGIN" />
